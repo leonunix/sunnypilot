@@ -158,11 +158,10 @@ class CAR(Platforms):
   )
   HONDA_ODYSSEY_RC5 = HondaBoschPlatformConfig(
     [
-      HondaCarDocs("Honda Civic 2022-24", "All", video_link="https://youtu.be/ytiOT5lcp6Q"),
-      HondaCarDocs("Honda Civic Hatchback 2022-24", "All", video_link="https://youtu.be/ytiOT5lcp6Q"),
+      HondaCarDocs("Honda Odyssey RC5 for JPN", "All", video_link=""),
     ],
-    HONDA_ODYSSEY_RC5.specs,
-    dbc_dict('honda_civic_ex_2022_can_generated', None),
+    CarSpecs(mass=1900, wheelbase=3.0, steerRatio=14.35, centerToFrontRatio=0.41, tireStiffnessFactor=0.82),
+    dbc_dict('honda_odyssey_rc5_can_generated', None),
     flags=HondaFlags.BOSCH_RADARLESS,
   )
   HONDA_CRV_5G = HondaBoschPlatformConfig(
