@@ -156,6 +156,15 @@ class CAR(Platforms):
     dbc_dict('honda_civic_ex_2022_can_generated', None),
     flags=HondaFlags.BOSCH_RADARLESS,
   )
+  HONDA_ODYSSEY_RC5 = HondaBoschPlatformConfig(
+    [
+      HondaCarDocs("Honda Civic 2022-24", "All", video_link="https://youtu.be/ytiOT5lcp6Q"),
+      HondaCarDocs("Honda Civic Hatchback 2022-24", "All", video_link="https://youtu.be/ytiOT5lcp6Q"),
+    ],
+    HONDA_ODYSSEY_RC5.specs,
+    dbc_dict('honda_civic_ex_2022_can_generated', None),
+    flags=HondaFlags.BOSCH_RADARLESS,
+  )
   HONDA_CRV_5G = HondaBoschPlatformConfig(
     [HondaCarDocs("Honda CR-V 2017-22", min_steer_speed=12. * CV.MPH_TO_MS)],
     # steerRatio: 12.3 is spec end-to-end
@@ -278,6 +287,7 @@ class CAR(Platforms):
     CarSpecs(mass=1838, wheelbase=2.75, centerToFrontRatio=0.4, steerRatio=16.50),  # 12.72 is end-to-end spec
     dbc_dict('honda_clarity_hybrid_2018_can_generated', 'acura_ilx_2016_nidec'),
   )
+
 
 
 HONDA_ALT_VERSION_REQUEST = bytes([uds.SERVICE_TYPE.READ_DATA_BY_IDENTIFIER]) + \
