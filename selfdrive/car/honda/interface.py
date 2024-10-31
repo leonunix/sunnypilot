@@ -236,7 +236,7 @@ class CarInterface(CarInterfaceBase):
       ret.safetyConfigs[0].safetyParam |= Panda.FLAG_HONDA_ALT_BRAKE
 
     # These cars use alternate SCM messages (SCM_FEEDBACK AND SCM_BUTTON)
-    if candidate in HONDA_NIDEC_ALT_SCM_MESSAGES:
+    if candidate in HONDA_NIDEC_ALT_SCM_MESSAGES or candidate == CAR.HONDA_ODYSSEY_RC5:
       ret.safetyConfigs[0].safetyParam |= Panda.FLAG_HONDA_NIDEC_ALT
 
     if ret.openpilotLongitudinalControl and candidate in HONDA_BOSCH:
