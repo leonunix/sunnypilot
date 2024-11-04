@@ -322,6 +322,10 @@ class Controls:
         safety_mismatch = pandaState.safetyModel != self.CP.safetyConfigs[i].safetyModel or \
                           pandaState.safetyParam != self.CP.safetyConfigs[i].safetyParam or \
                           pandaState.alternativeExperience != self.CP.alternativeExperience
+        if safety_mismatch:
+          cloudlog.error(f"Safety mismatch: panda safetyModel {pandaState.safetyModel}, expected {self.CP.safetyConfigs[i].safetyModel}, "
+                         f"panda safetyParam {pandaState.safetyParam}, expected {self.CP.safetyConfigs[i].safetyParam}, "
+                         f"panda alternativeExperience {pandaState.alternativeExperience}, expected {self.CP.alternativeExperience}")
       else:
         safety_mismatch = pandaState.safetyModel not in IGNORED_SAFETY_MODES
 
