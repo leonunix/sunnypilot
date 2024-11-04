@@ -74,7 +74,7 @@ class CarInterface(CarInterfaceBase):
     # For modeling details, see p.198-200 in "The Science of Vehicle Dynamics (2014), M. Guiggiani"
     ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0], [0]]
     ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-    ret.lateralTuning.pid.kf = 0.000095  # conservative feed-forward
+    ret.lateralTuning.pid.kf = 0.000090  # conservative feed-forward
 
     if candidate in HONDA_BOSCH:
       ret.longitudinalActuatorDelay = 0.5 # s
@@ -254,7 +254,7 @@ class CarInterface(CarInterfaceBase):
     ret.autoResumeSng = candidate in (HONDA_BOSCH | {CAR.HONDA_CIVIC, CAR.HONDA_CLARITY}) or ret.enableGasInterceptorDEPRECATED
     ret.minEnableSpeed = -1. if ret.autoResumeSng else 25.5 * CV.MPH_TO_MS
 
-    ret.steerActuatorDelay = 0.07
+    ret.steerActuatorDelay = 0.05
     ret.steerLimitTimer = 0.8
 
     return ret
