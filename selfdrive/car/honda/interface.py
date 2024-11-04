@@ -74,7 +74,7 @@ class CarInterface(CarInterfaceBase):
     # For modeling details, see p.198-200 in "The Science of Vehicle Dynamics (2014), M. Guiggiani"
     ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0], [0]]
     ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-    ret.lateralTuning.pid.kf = 0.00006  # conservative feed-forward
+    ret.lateralTuning.pid.kf = 0.000090  # conservative feed-forward
 
     if candidate in HONDA_BOSCH:
       ret.longitudinalActuatorDelay = 0.5 # s
@@ -111,11 +111,13 @@ class CarInterface(CarInterfaceBase):
       else:
         ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 4096], [0, 4096]]  # TODO: determine if there is a dead zone at the top end
         ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.8], [0.24]]
-
+###################################################################################
     elif candidate in (CAR.HONDA_ODYSSEY_RC5):
-        ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 32767], [0, 32767]]  # TODO: determine if there is a dead zone at the top end
-        ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.8], [0.24]]
-
+       # ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 2560, 10000], [0, 2560, 3840]]
+       # ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.21], [0.07]]
+      ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 4096], [0, 4096]]  # TODO: determine if there is a dead zone at the top end
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.28], [0.08]]
+####################################################################################
     elif candidate == CAR.HONDA_ACCORD:
       ret.lateralParams.torqueBP, ret.lateralParams.torqueV = [[0, 4096], [0, 4096]]  # TODO: determine if there is a dead zone at the top end
 
@@ -252,7 +254,7 @@ class CarInterface(CarInterfaceBase):
     ret.autoResumeSng = candidate in (HONDA_BOSCH | {CAR.HONDA_CIVIC, CAR.HONDA_CLARITY}) or ret.enableGasInterceptorDEPRECATED
     ret.minEnableSpeed = -1. if ret.autoResumeSng else 25.5 * CV.MPH_TO_MS
 
-    ret.steerActuatorDelay = 0.1
+    ret.steerActuatorDelay = 0.05
     ret.steerLimitTimer = 0.8
 
     return ret
