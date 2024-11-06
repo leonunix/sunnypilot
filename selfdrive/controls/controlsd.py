@@ -328,7 +328,7 @@ class Controls:
 
       # safety mismatch allows some time for pandad to set the safety mode and publish it back from panda
       if (safety_mismatch and self.sm.frame*DT_CTRL > 10.) or pandaState.safetyRxChecksInvalid or self.mismatch_counter >= 200:
-        cloudlog.error(f"safety_mismatch: {safety_mismatch}, safetyRxChecksInvalid: {pandaState.safetyRxChecksInvalid}, mismatch_counter: {self.mismatch_counter}")
+        cloudlog.error(f"safety_mismatch: {safety_mismatch},{self.sm.frame*DT_CTRL}, safetyRxChecksInvalid: {pandaState.safetyRxChecksInvalid}, mismatch_counter: {self.mismatch_counter}")
         self.events.add(EventName.controlsMismatch)
 
       if log.PandaState.FaultType.relayMalfunction in pandaState.faults:
