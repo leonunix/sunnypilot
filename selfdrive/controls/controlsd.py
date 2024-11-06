@@ -322,15 +322,15 @@ class Controls:
         safety_mismatch = pandaState.safetyModel != self.CP.safetyConfigs[i].safetyModel or \
                           pandaState.safetyParam != self.CP.safetyConfigs[i].safetyParam or \
                           pandaState.alternativeExperience != self.CP.alternativeExperience
-        if safety_mismatch:
-          cloudlog.error(f"Safety mismatch: panda safetyModel {pandaState.safetyModel}, expected {self.CP.safetyConfigs[i].safetyModel}, "
-                         f"panda safetyParam {pandaState.safetyParam}, expected {self.CP.safetyConfigs[i].safetyParam}, "
-                         f"panda alternativeExperience {pandaState.alternativeExperience}, expected {self.CP.alternativeExperience}")
+
       else:
         safety_mismatch = pandaState.safetyModel not in IGNORED_SAFETY_MODES
 
       # safety mismatch allows some time for pandad to set the safety mode and publish it back from panda
       if (safety_mismatch and self.sm.frame*DT_CTRL > 10.) or pandaState.safetyRxChecksInvalid or self.mismatch_counter >= 200:
+        cloudlog.error("safety mismatch " + safety_mismatch)
+        cloudlog.error("pandaState.safetyRxChecksInvalid " + pandaState.safetyRxChecksInvalid)
+        cloudlog.error("self.mismatch_counter " + self.mismatch_counter)
         self.events.add(EventName.controlsMismatch)
 
       if log.PandaState.FaultType.relayMalfunction in pandaState.faults:
