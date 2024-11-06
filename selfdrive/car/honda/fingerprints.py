@@ -316,6 +316,9 @@ FW_VERSIONS = {
     (Ecu.shiftByWire, 0x18da2bf1, None): [
       b'54008-TKN-H810\x00\x00',
     ],
+    (Ecu.fwdRadar, 0x18dab0f1, None): [
+      b'8S102-T6A-J050\x00\x000',
+    ],
   },
   CAR.HONDA_CIVIC_BOSCH_DIESEL: {
     (Ecu.transmission, 0x18da1ef1, None): [
