@@ -24,7 +24,9 @@ class CarInterface(CarInterfaceBase):
   @staticmethod
   def get_pid_accel_limits(CP, current_speed, cruise_speed):
     if CP.carFingerprint in HONDA_BOSCH:
-      return CarControllerParams.BOSCH_ACCEL_MIN, CarControllerParams.BOSCH_ACCEL_MAX
+      ACCEL_MAX_VALS = [CarControllerParams.BOSCH_ACCEL_MAX, 0.2]
+      ACCEL_MAX_BP = [cruise_speed - 2., cruise_speed - .2]
+      return CarControllerParams.BOSCH_ACCEL_MIN, interp(current_speed, ACCEL_MAX_BP, ACCEL_MAX_VALS)
     elif CP.enableGasInterceptorDEPRECATED:
       return CarControllerParams.NIDEC_ACCEL_MIN, CarControllerParams.NIDEC_ACCEL_MAX
     else:
