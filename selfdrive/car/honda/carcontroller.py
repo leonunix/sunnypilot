@@ -264,7 +264,8 @@ class CarController(CarControllerBase):
       if pcm_cancel_cmd:
         can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, CruiseButtons.CANCEL, self.CP.carFingerprint))
       elif CC.cruiseControl.resume:
-        can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, CruiseButtons.RES_ACCEL, self.CP.carFingerprint))
+        if self.frame % 5 == 0:
+          can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, CruiseButtons.RES_ACCEL, self.CP.carFingerprint))
       elif CS.out.cruiseState.enabled and not self.CP.pcmCruiseSpeed:
         self.cruise_button = self.get_cruise_buttons(CS, CC.vCruise)
         if self.cruise_button is not None:
