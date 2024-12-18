@@ -120,7 +120,6 @@ class CarController(CarControllerBase):
     self.apply_brake_last = 0
     self.last_pump_ts = 0.
     self.stopping_counter = 0
-    self.pre_resume = False
 
     self.accel = 0.0
     self.speed = 0.0
@@ -265,8 +264,9 @@ class CarController(CarControllerBase):
       if pcm_cancel_cmd:
         can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, CruiseButtons.CANCEL, self.CP.carFingerprint))
       elif CC.cruiseControl.resume:
-        if CC.cruiseControl.resume != self.pre_resume:
+        if (self.frame - self.last_button_frame) * DT_CTRL >= 0.1:
           can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, CruiseButtons.RES_ACCEL, self.CP.carFingerprint))
+          self.last_button_frame = self.frame
       elif CS.out.cruiseState.enabled and not self.CP.pcmCruiseSpeed:
         self.cruise_button = self.get_cruise_buttons(CS, CC.vCruise)
         if self.cruise_button is not None:
@@ -276,7 +276,6 @@ class CarController(CarControllerBase):
           if (self.frame - self.last_button_frame) * DT_CTRL > 0.01 * send_freq:
             can_sends.append(hondacan.spam_buttons_command(self.packer, self.CAN, self.cruise_button, self.CP.carFingerprint))
             self.last_button_frame = self.frame
-      self.pre_resume = CC.cruiseControl.resume
 
     else:
       # Send gas and brake commands.
