@@ -160,7 +160,7 @@ class CAR(Platforms):
     [
       HondaCarDocs("Honda Odyssey RC5 for JPN", "All", video_link=""),
     ],
-    CarSpecs(mass=1900, wheelbase=2.9, steerRatio=14.35, centerToFrontRatio=0.41, tireStiffnessFactor=0.82),
+    CarSpecs(mass=1950, wheelbase=2.9, steerRatio=14.35, centerToFrontRatio=0.44, tireStiffnessFactor=0.677),
     dbc_dict('honda_odyssey_rc5_can_generated', None),
     flags=HondaFlags.BOSCH_RADARLESS | HondaFlags.NIDEC_ALT_SCM_MESSAGES,
   )
