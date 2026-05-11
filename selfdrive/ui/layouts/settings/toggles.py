@@ -42,7 +42,7 @@ class TogglesLayout(Widget):
   def __init__(self):
     super().__init__()
     self._params = Params()
-    self._is_release = self._params.get_bool("IsReleaseBranch")
+    self._is_release = False  # self._params.get_bool("IsReleaseBranch")
 
     # param, title, desc, icon, needs_restart
     self._toggle_defs = {
@@ -152,6 +152,7 @@ class TogglesLayout(Widget):
       ui_state.personality = personality
 
   def show_event(self):
+    super().show_event()
     self._scroller.show_event()
     self._update_toggles()
 
