@@ -271,8 +271,8 @@ class Modem:
 
       # configure modem as data-centric
       'AT+QNVW=5280,0,"0102000000000000"',
-      'AT+QNVFW="/nv/item_files/ims/IMS_enable",00',
-      'AT+QNVFW="/nv/item_files/modem/mmode/ue_usage_setting",01',
+      'AT+QNVFW="/nv/item_files/ims/IMS_enable",01',
+      'AT+QNVFW="/nv/item_files/modem/mmode/ue_usage_setting",00',
     ]
     for c in cmds:
       self._at(c)
